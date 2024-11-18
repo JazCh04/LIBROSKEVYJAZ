@@ -6,7 +6,6 @@ Descripcion: Sistema de Gestión de Libros Electrónicos
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -59,6 +58,31 @@ type Prestamo struct {
 }
 
 // Funcion Principal
+
 func main() {
-	fmt.Println("¡Hola, mundo!")
+
+	/*Creacion de administradores
+	Utilizamos un slice [] para crear varios administradores y pueda ser dinamico
+	en caso de que se requiera crear mas en el futuro*/
+
+	administradores := []Administrador{
+		{
+			AdministradorID: 100,
+			Nombre:          "Kevin Lopez",
+			Mail:            "kevin.lopez@correo.com",
+			Contrasena:      "contrasena100",
+			Rol:             "Admin1",
+			FechaCreacion:   time.Now(),
+			UltimoAcceso:    time.Now(),
+		},
+		{
+			AdministradorID: 200,
+			Nombre:          "Jazmin Chillagana",
+			Mail:            "jazmin.chillagana@correo.com",
+			Contrasena:      "contrasena200",
+			Rol:             "Admin2",
+			FechaCreacion:   time.Now(),
+			UltimoAcceso:    time.Now(),
+		},
+	}
 }
