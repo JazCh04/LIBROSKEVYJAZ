@@ -85,4 +85,47 @@ func main() {
 			UltimoAcceso:    time.Now(),
 		},
 	}
+
+	/*Creacion de usuarios
+	Utilizamos un slice [] para crear varios usuarios ya que constantemente se puede
+	requerir crear mas en el futuro*/
+
+	usuarios := []Usuario{
+		{
+			UsuarioID:  001,
+			Nombre:     "Juan Perez",
+			Mail:       "juan.perez@correo.com",
+			Contrasena: "librosjuan1",
+			Rol:        "Usuario",
+		},
+		{
+			UsuarioID:  002,
+			Nombre:     "Maria Enriquez",
+			Mail:       "maria.enriquez@correo.com",
+			Contrasena: "mislibros123",
+			Rol:        "Usuario",
+		},
+		{
+			UsuarioID:  003,
+			Nombre:     "Pedro Alvarez",
+			Mail:       "pedro.alvarez@correo.com",
+			Contrasena: "miperro5",
+			Rol:        "Usuario",
+		},
+		{
+			UsuarioID:  004,
+			Nombre:     "Pablo Hernandez",
+			Mail:       "pablo.hernandez@correo.com",
+			Contrasena: "contra123",
+			Rol:        "Usuario",
+		},
+		{
+			UsuarioID:  005,
+			Nombre:     "Samantha Rivera",
+			Mail:       "samy.rivera@correo.com",
+			Contrasena: "riosol159",
+			Rol:        "Usuario",
+		},
+	}
+
 }
