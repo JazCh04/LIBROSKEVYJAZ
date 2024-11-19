@@ -6,6 +6,7 @@ Descripcion: Sistema de Gestión de Libros Electrónicos
 package main
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -137,7 +138,7 @@ func main() {
 			LibroID:          001,
 			Titulo:           "Cartas de un Estoico",
 			Autor:            "Lucio A. Séneca",
-			FechaPublicacion: "2023",
+			FechaPublicacion: time.Date(2024, time.September, 21, 0, 0, 0, 0, time.UTC),
 			Genero:           "Filosofía",
 			URL:              "www.libros.com/cartas_estoico",
 		},
@@ -145,7 +146,7 @@ func main() {
 			LibroID:          002,
 			Titulo:           "Los Discursos de Epicteto",
 			Autor:            "Epicteto",
-			FechaPublicacion: "2023",
+			FechaPublicacion: time.Date(2024, time.September, 21, 0, 0, 0, 0, time.UTC),
 			Genero:           "Filosofía",
 			URL:              "www.libros.com/discursos_epicteto",
 		},
@@ -153,7 +154,7 @@ func main() {
 			LibroID:          003,
 			Titulo:           "Manual de Epicteto",
 			Autor:            "Epicteto",
-			FechaPublicacion: "1980",
+			FechaPublicacion: time.Date(1980, time.May, 20, 0, 0, 0, 0, time.UTC),
 			Genero:           "Filosofía",
 			URL:              "www.libros.com/manual_epicteto",
 		},
@@ -161,7 +162,7 @@ func main() {
 			LibroID:          004,
 			Titulo:           "Meditaciones",
 			Autor:            "Marco Aurelio",
-			FechaPublicacion: "2023",
+			FechaPublicacion: time.Date(2023, time.October, 20, 0, 0, 0, 0, time.UTC),
 			Genero:           "Filosofía",
 			URL:              "www.libros.com/meditaciones",
 		},
@@ -169,10 +170,103 @@ func main() {
 			LibroID:          005,
 			Titulo:           "Sobre la brevedad de la vida",
 			Autor:            "Lucio A. Séneca",
-			FechaPublicacion: "2023",
+			FechaPublicacion: time.Date(2024, time.September, 21, 0, 0, 0, 0, time.UTC),
 			Genero:           "Filosofía",
 			URL:              "www.libros.com/brevedad_vida",
 		},
 	}
 
+	/*Creacion de inventario
+	Utilizamos un slice [] para crear varios libros ya que constantemente se puede
+	requerir crear mas en el futuro*/
+
+	inventario := []Inventario{
+		{
+			InventarioId: 001,
+			LibroID:      libros[0].LibroID,
+			Disponible:   true,
+		},
+		{
+			InventarioId: 002,
+			LibroID:      libros[1].LibroID,
+			Disponible:   true,
+		},
+		{
+			InventarioId: 003,
+			LibroID:      libros[2].LibroID,
+			Disponible:   true,
+		},
+		{
+			InventarioId: 004,
+			LibroID:      libros[3].LibroID,
+			Disponible:   true,
+		},
+		{
+			InventarioId: 005,
+			LibroID:      libros[4].LibroID,
+			Disponible:   true,
+		},
+	}
+
+	/*Creacion de prestamos
+	Utilizamos un slice [] para crear varios prestamos ya que constantemente se puede
+	requerir crear mas en el futuro*/
+
+	prestamos := []Prestamo{
+		{
+			PrestamoID:      001,
+			LibroID:         libros[0].LibroID,
+			UsuarioID:       usuarios[0].UsuarioID,
+			FechaReserva:    time.Now(),
+			FechaDevolucion: time.Now().AddDate(0, 0, 5),
+		},
+		{
+			PrestamoID:      002,
+			LibroID:         libros[1].LibroID,
+			UsuarioID:       usuarios[1].UsuarioID,
+			FechaReserva:    time.Now(),
+			FechaDevolucion: time.Now().AddDate(0, 0, 5),
+		},
+		{
+			PrestamoID:      003,
+			LibroID:         libros[2].LibroID,
+			UsuarioID:       usuarios[2].UsuarioID,
+			FechaReserva:    time.Now(),
+			FechaDevolucion: time.Now().AddDate(0, 0, 5),
+		},
+		{
+			PrestamoID:      004,
+			LibroID:         libros[3].LibroID,
+			UsuarioID:       usuarios[3].UsuarioID,
+			FechaReserva:    time.Now(),
+			FechaDevolucion: time.Now().AddDate(0, 0, 5),
+		},
+		{
+			PrestamoID:      005,
+			LibroID:         libros[4].LibroID,
+			UsuarioID:       usuarios[4].UsuarioID,
+			FechaReserva:    time.Now(),
+			FechaDevolucion: time.Now().AddDate(0, 0, 5),
+		},
+	}
+
+	//Imprimir detalles de administradores
+	for _, admin := range administradores {
+		fmt.Printf("Administrador: %+v\n", admin)
+	}
+
+	//Imprimir detalles de usuarios
+	for _, usuario := range usuarios {
+		fmt.Printf("Usuario: %+v\n", usuario)
+	}
+
+	// Imprimir detalles de inventario
+	for _, item := range inventario {
+		fmt.Printf("Inventario: %+v\n", item)
+	}
+
+	// Imprimir detalles de prestamos
+	for _, prestamos := range prestamos {
+		fmt.Printf("Prestamos: %+v\n", prestamos)
+	}
 }
