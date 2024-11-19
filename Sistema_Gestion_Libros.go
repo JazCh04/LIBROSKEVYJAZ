@@ -128,4 +128,51 @@ func main() {
 		},
 	}
 
+	/*Creacion de libros
+	Utilizamos un slice [] para crear varios libros ya que constantemente se puede
+	requerir crear mas en el futuro*/
+
+	libros := []Libro{
+		{
+			LibroID:          001,
+			Titulo:           "Cartas de un Estoico",
+			Autor:            "Lucio A. Séneca",
+			FechaPublicacion: "2023",
+			Genero:           "Filosofía",
+			URL:              "www.libros.com/cartas_estoico",
+		},
+		{
+			LibroID:          002,
+			Titulo:           "Los Discursos de Epicteto",
+			Autor:            "Epicteto",
+			FechaPublicacion: "2023",
+			Genero:           "Filosofía",
+			URL:              "www.libros.com/discursos_epicteto",
+		},
+		{
+			LibroID:          003,
+			Titulo:           "Manual de Epicteto",
+			Autor:            "Epicteto",
+			FechaPublicacion: "1980",
+			Genero:           "Filosofía",
+			URL:              "www.libros.com/manual_epicteto",
+		},
+		{
+			LibroID:          004,
+			Titulo:           "Meditaciones",
+			Autor:            "Marco Aurelio",
+			FechaPublicacion: "2023",
+			Genero:           "Filosofía",
+			URL:              "www.libros.com/meditaciones",
+		},
+		{
+			LibroID:          005,
+			Titulo:           "Sobre la brevedad de la vida",
+			Autor:            "Lucio A. Séneca",
+			FechaPublicacion: "2023",
+			Genero:           "Filosofía",
+			URL:              "www.libros.com/brevedad_vida",
+		},
+	}
+
 }
