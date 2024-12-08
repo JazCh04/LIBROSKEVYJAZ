@@ -309,7 +309,7 @@ func main() {
 	Utilizamos un slice [] para crear varios administradores y pueda ser dinamico
 	en caso de que se requiera crear mas en el futuro*/
 
-	administradores := []Administrador{
+	administradores := []*Administrador{
 		{
 			administradorID: 100,
 			nombre:          "Kevin Lopez",
@@ -376,7 +376,7 @@ func main() {
 	Utilizamos un slice [] para crear varios libros ya que constantemente se puede
 	requerir crear mas en el futuro*/
 
-	libros := []Libro{
+	libros := []*Libro{
 		{
 			libroID:          001,
 			titulo:           "Cartas de un Estoico",
@@ -423,7 +423,7 @@ func main() {
 	Utilizamos un slice [] para crear varios libros ya que constantemente se puede
 	requerir crear mas en el futuro*/
 
-	inventario := []Inventario{
+	inventario := []*Inventario{
 		{
 			inventarioId: 001,
 			libroID:      libros[0].libroID,
@@ -455,7 +455,7 @@ func main() {
 	Utilizamos un slice [] para crear varios prestamos ya que constantemente se puede
 	requerir crear mas en el futuro*/
 
-	prestamos := []Prestamo{
+	prestamos := []*Prestamo{
 		{
 			prestamoID:      001,
 			libroID:         libros[0].libroID,
