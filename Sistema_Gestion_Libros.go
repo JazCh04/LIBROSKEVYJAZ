@@ -249,7 +249,7 @@ func nuevoAdministrador(id int, nombre, mail, contrasena, rol string) (*Administ
 // Manejo de errores en creacion de usuarios
 func nuevoUsuario(id int, nombre, mail, contrasena, rol string) (*Usuario, error) {
 	if id <= 0 || nombre == "" || mail == "" || contrasena == "" {
-		return nil, errors.New("Error en los datos para crear un usuario")
+		return nil, errors.New("error en los datos para crear un usuario")
 	}
 	return &Usuario{
 		usuarioID:  id,
@@ -263,7 +263,7 @@ func nuevoUsuario(id int, nombre, mail, contrasena, rol string) (*Usuario, error
 // Manejo de errores en creacion de libros
 func nuevoLibro(id int, titulo, autor string, fecha time.Time, genero, url string) (*Libro, error) {
 	if id <= 0 || titulo == "" || autor == "" {
-		return nil, errors.New("Error en los datos para crear un libro")
+		return nil, errors.New("error en los datos para crear un libro")
 	}
 	return &Libro{
 		libroID:          id,
@@ -278,7 +278,7 @@ func nuevoLibro(id int, titulo, autor string, fecha time.Time, genero, url strin
 // Manejo de errores para registro de inventarios
 func nuevoInventario(id, libroID int, disponible bool) (*Inventario, error) {
 	if id <= 0 || libroID <= 0 {
-		return nil, errors.New("Error en los datos para registrar en inventario")
+		return nil, errors.New("error en los datos para registrar en inventario")
 	}
 	return &Inventario{
 		inventarioId: id,
@@ -290,7 +290,7 @@ func nuevoInventario(id, libroID int, disponible bool) (*Inventario, error) {
 // Manejo de errores para registro de prestamos
 func nuevoPrestamo(id, libroID, usuarioID int, fechaReserva, fechaDevolucion time.Time) (*Prestamo, error) {
 	if id <= 0 || libroID <= 0 || usuarioID <= 0 {
-		return nil, errors.New("Error en los datos para registrar un préstamo")
+		return nil, errors.New("error en los datos para registrar un préstamo")
 	}
 	return &Prestamo{
 		prestamoID:      id,
@@ -514,6 +514,34 @@ func main() {
 	}
 
 	// Prueba de manejo de errores intentando crear un prestamo sin datos
+	admin, err := nuevoAdministrador(0, "", "", "", "")
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Préstamo registrado: %+v\n", admin)
+	}
+
+	user, err := nuevoUsuario(0, "", "", "", "")
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Préstamo registrado: %+v\n", user)
+	}
+
+	libro, err := nuevoLibro(0, "", "", time.Date(2024, time.September, 21, 0, 0, 0, 0, time.UTC), "", "")
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Préstamo registrado: %+v\n", libro)
+	}
+
+	invent, err := nuevoInventario(0, libros[0].libroID, false)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Préstamo registrado: %+v\n", invent)
+	}
+
 	prestamo, err := nuevoPrestamo(0, libros[0].libroID, usuarios[0].usuarioID, time.Now(), time.Now().AddDate(0, 0, 5))
 	if err != nil {
 		fmt.Println("Error:", err)
