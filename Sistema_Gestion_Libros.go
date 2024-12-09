@@ -512,4 +512,12 @@ func main() {
 	for _, prestamos := range prestamos {
 		fmt.Printf("Prestamos: %+v\n", prestamos)
 	}
+
+	// Prueba de manejo de errores intentando crear un prestamo sin datos
+	prestamo, err := nuevoPrestamo(0, libros[0].libroID, usuarios[0].usuarioID, time.Now(), time.Now().AddDate(0, 0, 5))
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Préstamo registrado: %+v\n", prestamo)
+	}
 }
