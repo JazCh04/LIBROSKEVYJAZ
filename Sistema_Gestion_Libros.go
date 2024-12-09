@@ -233,7 +233,7 @@ func (p *Prestamo) SetFechaDevolucion(fecha time.Time) {
 // Manejo de errores en creacion de administradores
 func nuevoAdministrador(id int, nombre, mail, contrasena, rol string) (*Administrador, error) {
 	if id <= 0 || nombre == "" || mail == "" || contrasena == "" {
-		return nil, errors.New("Error en los datos para crear un administrador")
+		return nil, errors.New("error en los datos para crear un administrador")
 	}
 	return &Administrador{
 		administradorID: id,
