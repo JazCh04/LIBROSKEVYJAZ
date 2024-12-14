@@ -6,8 +6,12 @@ Descripcion: Sistema de Gestión de Libros Electrónicos
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
 	"time"
 )
 
@@ -15,48 +19,48 @@ import (
 
 // Administrador
 type Administrador struct {
-	administradorID int
-	nombre          string
-	mail            string
-	contrasena      string
-	rol             string
-	fechaCreacion   time.Time
-	ultimoAcceso    time.Time
+	administradorID int       `json:"id"`
+	nombre          string    `json:"nombre"`
+	mail            string    `json:"mail"`
+	contrasena      string    `json:"contrasena"`
+	rol             string    `json:"rol"`
+	fechaCreacion   time.Time `json:"fecha_creacion"`
+	ultimoAcceso    time.Time `json:"ultimo_acceso"`
 }
 
 // Usuario
 type Usuario struct {
-	usuarioID  int
-	nombre     string
-	mail       string
-	contrasena string
-	rol        string
+	usuarioID  int    `json:"id"`
+	nombre     string `json:"nombre"`
+	mail       string `json:"mail"`
+	contrasena string `json:"contrasena"`
+	rol        string `json:"rol"`
 }
 
 // Inventario
 type Inventario struct {
-	inventarioId int
-	libroID      int
-	disponible   bool
+	inventarioId int  `json:"id"`
+	libroID      int  `json:"libro_id"`
+	disponible   bool `json:"disponible"`
 }
 
 // Libro
 type Libro struct {
-	libroID          int
-	titulo           string
-	autor            string
-	fechaPublicacion time.Time
-	genero           string
-	url              string
+	libroID          int       `json:"id"`
+	titulo           string    `json:"titulo"`
+	autor            string    `json:"autor"`
+	fechaPublicacion time.Time `json:"fecha_publicacion"`
+	genero           string    `json:"genero"`
+	url              string    `json:"url"`
 }
 
 // Prestamo
 type Prestamo struct {
-	prestamoID      int
-	libroID         int
-	usuarioID       int
-	fechaReserva    time.Time
-	fechaDevolucion time.Time
+	prestamoID      int       `json:"id"`
+	libroID         int       `json:"libro_id"`
+	usuarioID       int       `json:"usuario_id"`
+	fechaReserva    time.Time `json:"fecha_reserva"`
+	fechaDevolucion time.Time `json:"fecha_devolucion"`
 }
 
 // Definicion de interfaces
@@ -86,19 +90,15 @@ type Serializacion interface {
 func (a *Administrador) GetNombre() string {
 	return a.nombre
 }
-
 func (a *Administrador) GetMail() string {
 	return a.mail
 }
-
 func (a *Administrador) GetRol() string {
 	return a.rol
 }
-
 func (a *Administrador) GetFechaCreacion() time.Time {
 	return a.fechaCreacion
 }
-
 func (a *Administrador) GetUltimoAcceso() time.Time {
 	return a.ultimoAcceso
 }
@@ -107,7 +107,6 @@ func (a *Administrador) GetUltimoAcceso() time.Time {
 func (u *Usuario) GetNombre() string {
 	return u.nombre
 }
-
 func (u *Usuario) GetMail() string {
 	return u.mail
 }
@@ -120,11 +119,9 @@ func (u *Usuario) GetRol() string {
 func (i *Inventario) GetInventario() int {
 	return i.inventarioId
 }
-
 func (i *Inventario) GetLibroID() int {
 	return i.libroID
 }
-
 func (i *Inventario) IsDisponible() bool {
 	return i.disponible
 }
@@ -133,19 +130,15 @@ func (i *Inventario) IsDisponible() bool {
 func (l *Libro) GetTitulo() string {
 	return l.titulo
 }
-
 func (l *Libro) GetAutor() string {
 	return l.autor
 }
-
 func (l *Libro) GetFechaPublicacion() time.Time {
 	return l.fechaPublicacion
 }
-
 func (l *Libro) GetGenero() string {
 	return l.genero
 }
-
 func (l *Libro) GetURL() string {
 	return l.url
 }
@@ -154,15 +147,12 @@ func (l *Libro) GetURL() string {
 func (p *Prestamo) GetLibroID() int {
 	return p.libroID
 }
-
 func (p *Prestamo) GetUsuarioID() int {
 	return p.usuarioID
 }
-
 func (p *Prestamo) GetFechaReserva() time.Time {
 	return p.fechaReserva
 }
-
 func (p *Prestamo) GetFechaDevolucion() time.Time {
 	return p.fechaDevolucion
 }
@@ -173,15 +163,12 @@ func (p *Prestamo) GetFechaDevolucion() time.Time {
 func (a *Administrador) SetNombre(nombre string) {
 	a.nombre = nombre
 }
-
 func (a *Administrador) SetMail(mail string) {
 	a.mail = mail
 }
-
 func (a *Administrador) SetRol(rol string) {
 	a.rol = rol
 }
-
 func (a *Administrador) SetUltimoAcceso(t time.Time) {
 	a.ultimoAcceso = t
 }
@@ -190,11 +177,9 @@ func (a *Administrador) SetUltimoAcceso(t time.Time) {
 func (u *Usuario) SetNombre(nombre string) {
 	u.nombre = nombre
 }
-
 func (u *Usuario) SetMail(mail string) {
 	u.mail = mail
 }
-
 func (u *Usuario) SetRol(rol string) {
 	u.rol = rol
 }
@@ -208,19 +193,15 @@ func (i *Inventario) SetDisponible(disponible bool) {
 func (l *Libro) SetTirulo(titulo string) {
 	l.titulo = titulo
 }
-
 func (l *Libro) SetAutor(autor string) {
 	l.autor = autor
 }
-
 func (l *Libro) SetFechaPublicacion(fecha time.Time) {
 	l.fechaPublicacion = fecha
 }
-
 func (l *Libro) SetGenero(genero string) {
 	l.genero = genero
 }
-
 func (l *Libro) SetURL(url string) {
 	l.url = url
 }
@@ -299,6 +280,120 @@ func nuevoPrestamo(id, libroID, usuarioID int, fechaReserva, fechaDevolucion tim
 		fechaReserva:    fechaReserva,
 		fechaDevolucion: fechaDevolucion,
 	}, nil
+}
+
+// Funciones para guardar y cargar en archivos JSON la información incluyendo manejo de errores
+func saveToJSON(data interface{}, filename string) error {
+	bytes, err := json.MarshalIndent(data, "", " ")
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(filename, bytes, 0644)
+}
+func loadFromJSON(filename string, v interface{}) error {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(data, v)
+}
+
+// Funcion para visualizar el archivo json con los administradores
+func visualizarAdministrador(w http.ResponseWriter, r *http.Request) {
+	var administradores []*Administrador
+	if err := loadFromJSON("administradores.json", &administradores); err != nil {
+		http.Error(w, "Error al cargar el archivo", http.StatusInternalServerError)
+		return
+	}
+
+	jsonBytes, err := json.Marshal(administradores)
+	if err != nil {
+		http.Error(w, "Error al serializar los administradores", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
+}
+
+// Funcion para visualizar el archivo json con los usuarios
+func visualizarUsuario(w http.ResponseWriter, r *http.Request) {
+	var usuarios []*Usuario
+	if err := loadFromJSON("usuarios.json", &usuarios); err != nil {
+		http.Error(w, "Error al cargar el archivo", http.StatusInternalServerError)
+		return
+	}
+
+	jsonBytes, err := json.Marshal(usuarios)
+	if err != nil {
+		http.Error(w, "Error al serializar los usuarios", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
+}
+
+// Funcion para visualizar el archivo json con los libros
+func visualizarLibro(w http.ResponseWriter, r *http.Request) {
+	var libros []*Libro
+	if err := loadFromJSON("libros.json", &libros); err != nil {
+		http.Error(w, "Error al cargar el archivo", http.StatusInternalServerError)
+		return
+	}
+
+	jsonBytes, err := json.Marshal(libros)
+	if err != nil {
+		http.Error(w, "Error al serializar los libros", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
+}
+
+// Funcion para visualizar el archivo json con el inventario
+func visualizarInventario(w http.ResponseWriter, r *http.Request) {
+	var inventario []*Inventario
+	if err := loadFromJSON("inventario.json", &inventario); err != nil {
+		http.Error(w, "Error al cargar el archivo", http.StatusInternalServerError)
+		return
+	}
+
+	jsonBytes, err := json.Marshal(inventario)
+	if err != nil {
+		http.Error(w, "Error al serializar el inventario", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
+}
+
+// Funcion para visualizar el archivo json con los prestamos
+func visualizarPrestamos(w http.ResponseWriter, r *http.Request) {
+	var prestamos []*Prestamo
+	if err := loadFromJSON("prestamos.json", &prestamos); err != nil {
+		http.Error(w, "Error al cargar el archivo", http.StatusInternalServerError)
+		return
+	}
+
+	jsonBytes, err := json.Marshal(prestamos)
+	if err != nil {
+		http.Error(w, "Error al serializar los prestamos", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
+}
+
+// Generamos funciones para paginas: de bienvenida y de despedida
+func homePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Bienvenido a la Biblioteca de Jaz y Kev")
+}
+func awayPage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Gracias por visitar nuestra Biblioteca")
 }
 
 // Funcion Principal
@@ -493,7 +588,51 @@ func main() {
 		},
 	}
 
-	//Imprimir detalles de administradores
+	//Funcion para guardar la informacion en los archivos JSON
+	//Administradores
+	if err := saveToJSON(administradores, "administradores.json"); err != nil {
+		fmt.Println("Error al guardar los administradores:", err)
+	}
+
+	//Usuarios
+	if err := saveToJSON(usuarios, "usuarios.json"); err != nil {
+		fmt.Println("Error al guardar los usuarios:", err)
+	}
+
+	//Libros
+	if err := saveToJSON(libros, "libros.json"); err != nil {
+		fmt.Println("Error al guardar los registros de libros:", err)
+	}
+
+	//Inventarios
+	if err := saveToJSON(inventario, "inventario.json"); err != nil {
+		fmt.Println("Error al guardar el inventario:", err)
+	}
+
+	//Prestamos
+	if err := saveToJSON(prestamos, "prestamos.json"); err != nil {
+		fmt.Println("Error al guardar los prestamos:", err)
+	}
+
+	//Generamos el servicio web para ver nuestras funcionalidades
+
+	http.HandleFunc("/", homePage)
+	http.HandleFunc("/visualizar-admin", visualizarAdministrador)
+	http.HandleFunc("/visualizar-user", visualizarUsuario)
+	http.HandleFunc("/visualizar-libro", visualizarLibro)
+	http.HandleFunc("/visualizar-inv", visualizarInventario)
+	http.HandleFunc("/visualizar-pres", visualizarPrestamos)
+	/*http.HandleFunc("/crear-usuario", crearUsuario)
+	http.HandleFunc("/crear-libro", crearLibro)
+	http.HandleFunc("/registrar-inventario", registrarInventario)
+	http.HandleFunc("/solicitar-prestamo", solicitarPrestamo)
+	http.HandleFunc("/ver-disponibilidad", verDisponibilidad)*/
+	http.HandleFunc("/away", awayPage)
+
+	fmt.Println("Servidor iniciado en el puerto 8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
+
+	/*//Imprimir detalles de administradores
 	for _, admin := range administradores {
 		fmt.Printf("Administrador: %+v\n", admin)
 	}
@@ -547,5 +686,5 @@ func main() {
 		fmt.Println("Error:", err)
 	} else {
 		fmt.Printf("Préstamo registrado: %+v\n", prestamo)
-	}
+	}*/
 }
