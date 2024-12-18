@@ -1,7 +1,42 @@
 [
- {},
- {},
- {},
- {},
- {}
+ {
+  "id": 1,
+  "titulo": "Cartas de un Estoico",
+  "autor": "Lucio A. Séneca",
+  "fecha_publicacion": "2024 September",
+  "genero": "Filosofía",
+  "url": "www.libros.com/cartas_estoico"
+ },
+ {
+  "id": 2,
+  "titulo": "Los Discursos de Epicteto",
+  "autor": "Epicteto",
+  "fecha_publicacion": "2024 September",
+  "genero": "Filosofía",
+  "url": "www.libros.com/discursos_epicteto"
+ },
+ {
+  "id": 3,
+  "titulo": "Manual de Epicteto",
+  "autor": "Epicteto",
+  "fecha_publicacion": "1980 May",
+  "genero": "Filosofía",
+  "url": "www.libros.com/manual_epicteto"
+ },
+ {
+  "id": 4,
+  "titulo": "Meditaciones",
+  "autor": "Marco Aurelio",
+  "fecha_publicacion": "2023 October",
+  "genero": "Filosofía",
+  "url": "www.libros.com/meditaciones"
+ },
+ {
+  "id": 5,
+  "titulo": "Sobre la brevedad de la vida",
+  "autor": "Lucio A. Séneca",
+  "fecha_publicacion": "2024 September",
+  "genero": "Filosofía",
+  "url": "www.libros.com/brevedad_vida"
+ }
 ]

@@ -1,4 +1,20 @@
 [
- {},
- {}
+ {
+  "id": 100,
+  "nombre": "Kevin Lopez",
+  "mail": "kevin.lopez@correo.com",
+  "contrasena": "contrasena100",
+  "rol": "Administrador",
+  "fecha_creacion": "2024-12-18T17:30:51.5524213-05:00",
+  "ultimo_acceso": "2024-12-18T17:30:51.5524213-05:00"
+ },
+ {
+  "id": 200,
+  "nombre": "Jazmin Chillagana",
+  "mail": "jazmin.chillagana@correo.com",
+  "contrasena": "contrasena200",
+  "rol": "Administrador",
+  "fecha_creacion": "2024-12-18T17:30:51.5524213-05:00",
+  "ultimo_acceso": "2024-12-18T17:30:51.5524213-05:00"
+ }
 ]

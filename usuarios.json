@@ -1,7 +1,37 @@
 [
- {},
- {},
- {},
- {},
- {}
+ {
+  "id": 1,
+  "nombre": "Juan Perez",
+  "mail": "juan.perez@correo.com",
+  "contrasena": "librosjuan1",
+  "rol": "Usuario"
+ },
+ {
+  "id": 2,
+  "nombre": "Maria Enriquez",
+  "mail": "maria.enriquez@correo.com",
+  "contrasena": "mislibros123",
+  "rol": "Usuario"
+ },
+ {
+  "id": 3,
+  "nombre": "Pedro Alvarez",
+  "mail": "pedro.alvarez@correo.com",
+  "contrasena": "miperro5",
+  "rol": "Usuario"
+ },
+ {
+  "id": 4,
+  "nombre": "Pablo Hernandez",
+  "mail": "pablo.hernandez@correo.com",
+  "contrasena": "contra123",
+  "rol": "Usuario"
+ },
+ {
+  "id": 5,
+  "nombre": "Samantha Rivera",
+  "mail": "samy.rivera@correo.com",
+  "contrasena": "riosol159",
+  "rol": "Usuario"
+ }
 ]

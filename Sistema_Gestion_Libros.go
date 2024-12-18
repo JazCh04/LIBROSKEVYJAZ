@@ -616,7 +616,7 @@ func crearUsuario(w http.ResponseWriter, r *http.Request) {
 var listadouser Listadouser
 
 // Manejo de errores en creacion de libros
-func nuevoLibro(id int, titulo, autor string, fecha time.Time, genero, url string) (*Libro, error) {
+func nuevoLibro(id int, titulo, autor string, fecha string, genero, url string) (*Libro, error) {
 	if id <= 0 || titulo == "" || autor == "" {
 		return nil, errors.New("error en los datos para crear un libro")
 	}

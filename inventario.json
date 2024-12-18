@@ -1,7 +1,27 @@
 [
- {},
- {},
- {},
- {},
- {}
+ {
+  "id": 1,
+  "libro_id": 1,
+  "disponible": true
+ },
+ {
+  "id": 2,
+  "libro_id": 2,
+  "disponible": true
+ },
+ {
+  "id": 3,
+  "libro_id": 3,
+  "disponible": true
+ },
+ {
+  "id": 4,
+  "libro_id": 4,
+  "disponible": true
+ },
+ {
+  "id": 5,
+  "libro_id": 5,
+  "disponible": true
+ }
 ]
